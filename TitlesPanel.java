@@ -37,6 +37,10 @@ public class TitlesPanel extends JPanel implements ActionListener
         }
     }
 
+    /**
+     * Method that actually pefrorms the drawing of a single figure.
+     * @param g
+     */
     private void doDrawing(final Graphics g) {
         this.is_done = false;
         (this.g2d = (Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -64,6 +68,10 @@ public class TitlesPanel extends JPanel implements ActionListener
         this.is_done = true;
     }
 
+    /**
+     * Method used to do all the drawing. Calls doDrawing method
+     * @param g
+     */
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         this.doDrawing(g);
