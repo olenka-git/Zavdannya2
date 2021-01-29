@@ -13,6 +13,8 @@ import java.awt.Shape;
 // Decompiled by Procyon v0.5.36
 // 
 
+
+
 public class ShapeFactory
 {
     public Shape shape;
@@ -21,6 +23,15 @@ public class ShapeFactory
     public int width;
     public int height;
 
+    /**
+     * Factory which actually makes drawing of figures.
+     *
+     * @param shape_type
+     * Determines type and style of figures
+     * Accept two-digit input;
+     * First digit allowed values :1,3,5,7,9
+     * Second digit allowed values: 1,3,4,7,8
+     */
     public ShapeFactory(final int shape_type) {
         this.width = 25;
         this.height = 25;
@@ -82,6 +93,14 @@ public class ShapeFactory
         }
     }
 
+    /**
+     * Method used to create a star-shaped figure
+     * @param arms
+     * @param center
+     * @param rOuter
+     * @param rInner
+     * @return
+     */
     private static Shape createStar(final int arms, final Point center, final double rOuter, final double rInner) {
         final double angle = 3.141592653589793 / arms;
         final GeneralPath path = new GeneralPath();
