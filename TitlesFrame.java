@@ -12,6 +12,9 @@ public class TitlesFrame extends JFrame
         this.initUI();
     }
 
+    /**
+     * Method used to initialise UI. Window title and figure style can be set inside
+     */
     private void initUI() {
         this.setTitle("\u041a\u0440\u0438\u0432\u044b\u0435 \u0444\u0438\u0433\u0443\u0440\u044b");
         this.setDefaultCloseOperation(3);
@@ -20,6 +23,10 @@ public class TitlesFrame extends JFrame
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Main method of the program.
+     * @param args
+     */
     public static void main(final String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
