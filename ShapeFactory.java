@@ -27,29 +27,28 @@ public class ShapeFactory
      * Factory which actually makes drawing of figures.
      *
      * @param shape_type
+     * @param shape_style
      * Determines type and style of figures
-     * Accept two-digit input;
-     * First digit allowed values :1,3,5,7,9
-     * Second digit allowed values: 1,3,4,7,8
      */
-    public ShapeFactory(final int shape_type) {
+    public ShapeFactory(final TitlesFrame.SHAPE shape_type, final TitlesFrame.STYLE shape_style) {
         this.width = 25;
         this.height = 25;
         this.stroke = new BasicStroke(3.0f);
-        switch (shape_type / 10) {
-            case 1: {
+        this.paint = Color.BLACK;
+        switch (shape_type) {
+            case HEX: {
                 this.shape = createStar(3, new Point(0, 0), this.width / 2.0, this.width / 2.0);
                 break;
             }
-            case 3: {
+            case FIVESTAR: {
                 this.shape = createStar(5, new Point(0, 0), this.width / 2.0, this.width / 4.0);
                 break;
             }
-            case 5: {
+            case SQUARE: {
                 this.shape = new Rectangle2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height);
                 break;
             }
-            case 7: {
+            case TRIANGLE: {
                 final GeneralPath path = new GeneralPath();
                 final double tmp_height = Math.sqrt(2.0) / 2.0 * this.height;
                 path.moveTo(-this.width / 2, -tmp_height);
@@ -59,36 +58,30 @@ public class ShapeFactory
                 this.shape = path;
                 break;
             }
-            case 9: {
+            case PACMAN: {
                 this.shape = new Arc2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height, 30.0, 300.0, 2);
                 break;
             }
-            default: {
-                throw new Error("type is nusupported");
-            }
         }
-        switch (shape_type % 10) {
-            case 1: {
-                this.stroke = new BasicStroke(3.0f);
+        switch (shape_style) {
+            case THINSTROKE: {
+                this.stroke = new BasicStroke(1.0f);
                 break;
             }
-            case 3: {
+            case DEFAULT: {
                 break;
             }
-            case 4: {
+            case THICKSTROKE: {
                 this.stroke = new BasicStroke(7.0f);
                 break;
             }
-            case 7: {
+            case GRADIENT: {
                 this.paint = new GradientPaint((float)(-this.width), (float)(-this.height), Color.white, (float)this.width, (float)this.height, Color.gray, true);
                 break;
             }
-            case 8: {
+            case RED: {
                 this.paint = Color.red;
                 break;
-            }
-            default: {
-                throw new Error("type is nusupported");
             }
         }
     }
@@ -102,7 +95,7 @@ public class ShapeFactory
      * @return
      */
     private static Shape createStar(final int arms, final Point center, final double rOuter, final double rInner) {
-        final double angle = 3.141592653589793 / arms;
+        final double angle = Math.PI / arms;
         final GeneralPath path = new GeneralPath();
         for (int i = 0; i < 2 * arms; ++i) {
             final double r = ((i & 0x1) == 0x0) ? rOuter : rInner;
